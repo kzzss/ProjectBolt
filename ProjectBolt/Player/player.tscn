@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://q83tfivj774n"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_trjh2"]
+[ext_resource type="Script" path="res://Player/WeaponPivot.gd" id="2_a4i3h"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ubtck"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5tf0"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 5
+axis_lock_linear_z = true
+script = ExtResource("1_trjh2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ubtck")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_f5tf0")
+
+[node name="WeaponPivot" type="Node3D" parent="."]
+script = ExtResource("2_a4i3h")
+
+[node name="ProjectileSpawn" type="Node3D" parent="WeaponPivot"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)

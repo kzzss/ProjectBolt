@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://dggjlb4bkwv80"]
+
+[ext_resource type="Script" path="res://Misc/SmallProjectile.gd" id="1_oha3w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l7c1s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0d1um"]
+albedo_color = Color(0.917647, 0.701961, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7mexx"]
+material = SubResource("StandardMaterial3D_0d1um")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rf6lp"]
+albedo_color = Color(0.611765, 0.360784, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_e7dgd"]
+material = SubResource("StandardMaterial3D_rf6lp")
+
+[node name="SmallProjectile" type="Area3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_oha3w")
+speed = 50
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_l7c1s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, -0.8, 0, 0.8, -3.49691e-08, 0, 0, 0.624)
+mesh = SubResource("CapsuleMesh_7mexx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, -0.786104, 3.43617e-08)
+mesh = SubResource("SphereMesh_e7dgd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
