@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://q83tfivj774n"]
+[gd_scene load_steps=13 format=3 uid="uid://q83tfivj774n"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_trjh2"]
 [ext_resource type="Script" path="res://Player/WeaponPivot.gd" id="2_a4i3h"]
 [ext_resource type="Material" uid="uid://ch1o2wnup6m83" path="res://Materials/blue.tres" id="3_dpkoy"]
 [ext_resource type="Script" path="res://Player/gizmo.gd" id="3_nctvr"]
+[ext_resource type="Material" uid="uid://dkkhkh6y1ys04" path="res://Materials/green.tres" id="4_j0if4"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ubtck"]
 
@@ -13,6 +14,9 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_e447r"]
 material = ExtResource("3_dpkoy")
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgq8o"]
+material = ExtResource("4_j0if4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07hri"]
 albedo_color = Color(1, 0.396078, 0.372549, 1)
@@ -47,8 +51,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.5)
 mesh = SubResource("BoxMesh_e447r")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="WeaponPivot/MeshInstance3D"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_e447r")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_mgq8o")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
@@ -59,3 +63,15 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 mesh = SubResource("SphereMesh_lnw5u")
 skeleton = NodePath("../WeaponPivot")
 script = ExtResource("3_nctvr")
+
+[node name="ChargeTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="ChargeUpTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_charge_timer_timeout"]
+[connection signal="timeout" from="ChargeUpTimer" to="." method="_on_charge_up_timer_timeout"]

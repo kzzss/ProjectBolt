@@ -19,6 +19,5 @@ func _physics_process(delta):
 	
 	if not raycast_result.is_empty():
 		var pos = raycast_result.position
-		print(get_node("..").position)
 		get_node("../gizmo").position = Vector3(pos.x, pos.y, 0)
 		look_at(Vector3(pos.x, pos.y, 0), Vector3(0,0,1))
