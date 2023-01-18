@@ -1,10 +1,24 @@
 extends Node3D
 
-func ScreenPointToRay():
-	var spaceState = get_world_3d().direct_space_state
-	var mousePos = get_viewport().get_mouse_position()
+@onready var camera = get_node("../Camera3D")
+
+var rayOrigin = Vector3()
+var rayEnd = Vector3()
+
+func _physics_process(delta):
+	var space_state = get_world_3d().direct_space_state
+	var mouse_position = get_viewport().get_mouse_position()
+	var ray_query = PhysicsRayQueryParameters3D.new()
 	
-	var camera = get_tree().root.get_camera_3d()
-	var rayOrigin = camera.project_ray_origin(mousePos)
-	var rayEnd = rayOrigin + camera.project_ray_normal(mousePos) * 2000
-	var rayArray = spaceState.intersect_ray(rayOrigin, rayEnd)
+	rayOrigin = camera.project_ray_origin(mouse_position)
+	rayEnd = rayOrigin + camera.project_ray_normal(mouse_position) * 2000
+	ray_query.from = rayOrigin
+	ray_query.to = rayEnd
+	ray_query.collide_with_areas = true
+	var raycast_result = space_state.intersect_ray(ray_query)
+	
+	if not raycast_result.is_empty():
+		var pos = raycast_result.position
+		print(get_node("..").position)
+		get_node("../gizmo").position = Vector3(pos.x, pos.y, 0)
+		look_at(Vector3(pos.x, pos.y, 0), Vector3(0,0,1))

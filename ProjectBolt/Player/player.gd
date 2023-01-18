@@ -15,7 +15,7 @@ func _process(delta):
 		var sp = smallProjectile.instantiate()
 		owner.add_child(sp)
 		sp.transform = $WeaponPivot/ProjectileSpawn.global_transform
-		sp.velocity = -sp.transform.x * sp.speed
+		sp.velocity = -sp.transform.basis.x * sp.speed
 
 func _physics_process(delta):
 	# Add the gravity.

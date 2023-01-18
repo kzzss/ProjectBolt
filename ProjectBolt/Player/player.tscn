@@ -1,13 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://q83tfivj774n"]
+[gd_scene load_steps=11 format=3 uid="uid://q83tfivj774n"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_trjh2"]
 [ext_resource type="Script" path="res://Player/WeaponPivot.gd" id="2_a4i3h"]
+[ext_resource type="Material" uid="uid://ch1o2wnup6m83" path="res://Materials/blue.tres" id="3_dpkoy"]
+[ext_resource type="Script" path="res://Player/gizmo.gd" id="3_nctvr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ubtck"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5tf0"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_0tqk7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e447r"]
+material = ExtResource("3_dpkoy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07hri"]
+albedo_color = Color(1, 0.396078, 0.372549, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lnw5u"]
+material = SubResource("StandardMaterial3D_07hri")
+
+[node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 5
 axis_lock_linear_z = true
@@ -23,4 +36,26 @@ shape = SubResource("CapsuleShape3D_f5tf0")
 script = ExtResource("2_a4i3h")
 
 [node name="ProjectileSpawn" type="Node3D" parent="WeaponPivot"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(-1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WeaponPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.5, 0, 0)
+mesh = SubResource("BoxMesh_0tqk7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WeaponPivot/MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.5)
+mesh = SubResource("BoxMesh_e447r")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="WeaponPivot/MeshInstance3D"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_e447r")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+v_offset = 1.0
+
+[node name="gizmo" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_lnw5u")
+skeleton = NodePath("../WeaponPivot")
+script = ExtResource("3_nctvr")
