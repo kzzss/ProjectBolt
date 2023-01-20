@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://q83tfivj774n"]
+[gd_scene load_steps=18 format=3 uid="uid://q83tfivj774n"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_trjh2"]
 [ext_resource type="Script" path="res://Player/WeaponPivot.gd" id="2_a4i3h"]
@@ -6,9 +6,32 @@
 [ext_resource type="Script" path="res://Player/gizmo.gd" id="3_nctvr"]
 [ext_resource type="Material" uid="uid://dkkhkh6y1ys04" path="res://Materials/green.tres" id="4_j0if4"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx46y"]
+albedo_color = Color(0.596078, 0.254902, 0, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ubtck"]
+material = SubResource("StandardMaterial3D_mx46y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxr4e"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_ero08"]
+material = SubResource("StandardMaterial3D_qxr4e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v377i"]
+albedo_color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d1umr"]
+material = SubResource("StandardMaterial3D_v377i")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f5tf0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07hri"]
+albedo_color = Color(1, 0.396078, 0.372549, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_lnw5u"]
+material = SubResource("StandardMaterial3D_07hri")
 
 [sub_resource type="BoxMesh" id="BoxMesh_0tqk7"]
 
@@ -18,23 +41,47 @@ material = ExtResource("3_dpkoy")
 [sub_resource type="BoxMesh" id="BoxMesh_mgq8o"]
 material = ExtResource("4_j0if4")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07hri"]
-albedo_color = Color(1, 0.396078, 0.372549, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_lnw5u"]
-material = SubResource("StandardMaterial3D_07hri")
-
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 5
 axis_lock_linear_z = true
 script = ExtResource("1_trjh2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="ModelPivot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelPivot"]
 mesh = SubResource("CapsuleMesh_ubtck")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ModelPivot/MeshInstance3D"]
+transform = Transform3D(0.472, 0, 0, 0, 0.5, 0, 0, 0, 0.685, 0.27362, 0.486796, 0)
+mesh = SubResource("BoxMesh_ero08")
+
+[node name="Jetpack" type="MeshInstance3D" parent="ModelPivot/MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.552, 0.096527, 0)
+mesh = SubResource("CapsuleMesh_d1umr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_f5tf0")
+
+[node name="gizmo" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+mesh = SubResource("SphereMesh_lnw5u")
+skeleton = NodePath("../WeaponPivot")
+script = ExtResource("3_nctvr")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+v_offset = 2.0
+
+[node name="ChargeTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="ChargeUpTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
 
 [node name="WeaponPivot" type="Node3D" parent="."]
 script = ExtResource("2_a4i3h")
@@ -53,25 +100,6 @@ mesh = SubResource("BoxMesh_e447r")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="WeaponPivot/MeshInstance3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_mgq8o")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
-v_offset = 2.0
-
-[node name="gizmo" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
-mesh = SubResource("SphereMesh_lnw5u")
-skeleton = NodePath("../WeaponPivot")
-script = ExtResource("3_nctvr")
-
-[node name="ChargeTimer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.5
-one_shot = true
-
-[node name="ChargeUpTimer" type="Timer" parent="."]
-wait_time = 0.75
-one_shot = true
 
 [connection signal="timeout" from="ChargeTimer" to="." method="_on_charge_timer_timeout"]
 [connection signal="timeout" from="ChargeUpTimer" to="." method="_on_charge_up_timer_timeout"]

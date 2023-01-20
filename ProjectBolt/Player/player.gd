@@ -3,7 +3,7 @@ extends CharacterBody3D
 
 @export var move_speed = 7.0
 @export var jump_strength = 5
-@export var thrust_strength = 14
+@export var thrust_strength = 16
 @export var fuel = 60
 @export var acceleration = 100.0
 @export var friction = 100.0
@@ -38,7 +38,6 @@ func _process(delta):
 		
 		chargeStatus = 0
 		
-	print(fuel)
 		
 
 func _physics_process(delta):

@@ -3,19 +3,19 @@
 [ext_resource type="Script" path="res://Misc/big_projectile.gd" id="1_1sv40"]
 [ext_resource type="Material" uid="uid://dkkhkh6y1ys04" path="res://Materials/green.tres" id="1_cqf6b"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_llq88"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_cllfi"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_wvcrd"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4mqjn"]
 material = ExtResource("1_cqf6b")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2mqb"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvbcy"]
 albedo_color = Color(0, 0.635294, 0.360784, 1)
 roughness = 0.0
 emission_enabled = true
 emission = Color(0, 0.623529, 0.47451, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_5kbxl"]
-material = SubResource("StandardMaterial3D_e2mqb")
+[sub_resource type="SphereMesh" id="SphereMesh_et3b5"]
+material = SubResource("StandardMaterial3D_hvbcy")
 
 [node name="BigProjectile" type="Area3D"]
 collision_layer = 8
@@ -24,14 +24,14 @@ script = ExtResource("1_1sv40")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-shape = SubResource("BoxShape3D_llq88")
+shape = SubResource("BoxShape3D_cllfi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, -6.55671e-08, -1.5, 0, 1.5, -6.55671e-08, 0, 0, 0.67)
-mesh = SubResource("CapsuleMesh_wvcrd")
+mesh = SubResource("CapsuleMesh_4mqjn")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, -8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0)
-mesh = SubResource("SphereMesh_5kbxl")
+mesh = SubResource("SphereMesh_et3b5")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
