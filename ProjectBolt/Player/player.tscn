@@ -40,10 +40,10 @@ shape = SubResource("CapsuleShape3D_f5tf0")
 script = ExtResource("2_a4i3h")
 
 [node name="ProjectileSpawn" type="Node3D" parent="WeaponPivot"]
-transform = Transform3D(-1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0, 0, -1)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WeaponPivot"]
-transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.5, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -0.2, 0, 0.2, 0, 1, 0, -8.74228e-09, 0, 0, -0.5)
 mesh = SubResource("BoxMesh_0tqk7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="WeaponPivot/MeshInstance3D"]
@@ -55,8 +55,8 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_mgq8o")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-v_offset = 1.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+v_offset = 2.0
 
 [node name="gizmo" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)

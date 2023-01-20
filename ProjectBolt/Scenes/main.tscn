@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dks7n30f3n08v"]
+[gd_scene load_steps=6 format=3 uid="uid://dks7n30f3n08v"]
 
 [ext_resource type="PackedScene" uid="uid://q83tfivj774n" path="res://Player/player.tscn" id="1_n2ind"]
+[ext_resource type="Texture2D" uid="uid://c0du0uwlwdopi" path="res://Assets/maxresdefault (1).jpg" id="2_b8ecj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1bh07"]
 
@@ -31,11 +32,15 @@ shape = SubResource("BoxShape3D_1tiwg")
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_n2ind")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22714, 0)
 
-[node name="Area3D" type="Area3D" parent="CharacterBody3D"]
-transform = Transform3D(15, 0, 0, 0, 10, 0, 0, 0, 0.014, 0, 0, 0)
+[node name="AimArea" type="Area3D" parent="CharacterBody3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/AimArea"]
 shape = SubResource("BoxShape3D_skejm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.86438, -0.19842, -0.462035, 0.502839, 0.341084, 0.794238, 0, -0.918853, 0.3946, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 4.856, -3.645)
+texture = ExtResource("2_b8ecj")
