@@ -28,5 +28,4 @@ func _physics_process(delta):
 		player.rotation.y = 0
 	else:
 		player.rotation.y = deg_to_rad(180)
-	print(player.global_position.x , raycast_result.position.x)
 

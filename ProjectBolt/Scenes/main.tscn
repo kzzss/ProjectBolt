@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dks7n30f3n08v"]
+[gd_scene load_steps=7 format=3 uid="uid://dks7n30f3n08v"]
 
 [ext_resource type="PackedScene" uid="uid://q83tfivj774n" path="res://Player/player.tscn" id="1_n2ind"]
 [ext_resource type="Texture2D" uid="uid://c0du0uwlwdopi" path="res://Assets/maxresdefault (1).jpg" id="2_b8ecj"]
+[ext_resource type="PackedScene" uid="uid://dtt10pgt4w0rj" path="res://Enemies/enemy1.tscn" id="3_hsven"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1bh07"]
 
@@ -33,7 +34,7 @@ shape = SubResource("BoxShape3D_1tiwg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22714, 0)
 
 [node name="AimArea" type="Area3D" parent="CharacterBody3D"]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/AimArea"]
 shape = SubResource("BoxShape3D_skejm")
@@ -44,3 +45,6 @@ transform = Transform3D(0.86438, -0.19842, -0.462035, 0.502839, 0.341084, 0.7942
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 4.856, -3.645)
 texture = ExtResource("2_b8ecj")
+
+[node name="enemy1" parent="." instance=ExtResource("3_hsven")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2575, 4.06571, 0)

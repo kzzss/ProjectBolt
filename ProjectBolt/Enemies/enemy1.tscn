@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtt10pgt4w0rj"]
+
+[ext_resource type="Material" uid="uid://bvpnq03tke8fv" path="res://Materials/blackshiny.tres" id="1_5y2d5"]
+[ext_resource type="Script" path="res://Enemies/enemy1.gd" id="1_8n28e"]
+[ext_resource type="PackedScene" uid="uid://bov8r5vopl0m6" path="res://Misc/hurtbox.tscn" id="3_1id6r"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ra5ht"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ytuty"]
+material = ExtResource("1_5y2d5")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h8gcf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wvd7k"]
+
+[node name="enemy1" type="CharacterBody3D"]
+script = ExtResource("1_8n28e")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_ra5ht")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.528, 0, 0, 0, 0.294, 0, 0, 0, 0.528, 0, 0.108, 0.24)
+mesh = SubResource("BoxMesh_ytuty")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_h8gcf")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_1id6r")]
+transform = Transform3D(1.084, 0, 0, 0, 1.084, 0, 0, 0, 1.084, 0, 0, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("SphereShape3D_wvd7k")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

@@ -1,6 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://q83tfivj774n"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_trjh2"]
+[ext_resource type="Material" uid="uid://bvpnq03tke8fv" path="res://Materials/blackshiny.tres" id="2_2y3ag"]
 [ext_resource type="Script" path="res://Player/WeaponPivot.gd" id="2_a4i3h"]
 [ext_resource type="Material" uid="uid://ch1o2wnup6m83" path="res://Materials/blue.tres" id="3_dpkoy"]
 [ext_resource type="Script" path="res://Player/gizmo.gd" id="3_nctvr"]
@@ -12,12 +13,8 @@ albedo_color = Color(0.596078, 0.254902, 0, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ubtck"]
 material = SubResource("StandardMaterial3D_mx46y")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxr4e"]
-albedo_color = Color(0, 0, 0, 1)
-roughness = 0.2
-
 [sub_resource type="BoxMesh" id="BoxMesh_ero08"]
-material = SubResource("StandardMaterial3D_qxr4e")
+material = ExtResource("2_2y3ag")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v377i"]
 albedo_color = Color(0.223529, 0.223529, 0.223529, 1)
